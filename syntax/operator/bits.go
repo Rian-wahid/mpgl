@@ -1,8 +1,6 @@
 package operator
 
 import (
-	"math"
-
 	"github.com/Rian-wahid/mpgl/syntax/types"
 )
 
@@ -18,62 +16,141 @@ func (b *BitOr) Operate(operands ...types.Type) types.Type {
 	if !isNumber(operands[0]) || !isNumber(operands[1]) {
 		panic("operand must be a number")
 	}
-	if operands[0].TypeName() != operands[0].TypeName() {
-		panic("operands type not same")
-	}
+
 	switch operands[0].TypeName() {
 	case "int8":
-		n := typeSliceToNSlice[int8](operands)
-		nr := n[0] | n[1]
-		return types.NewInt8(nr)
+		n1 := operands[0].Value().(int8)
+		if operands[1].TypeName() == "int8" {
+			n2 := operands[1].Value().(int8)
+			return types.NewInt8(n1 | n2)
+		} else if operands[1].TypeName() == "number" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewNumber(float64(int64(n1) | n2))
+		} else {
+			panic("invalid type")
+		}
 	case "byte":
-		n := typeSliceToNSlice[byte](operands)
-		nr := n[0] | n[1]
-		return types.NewByte(nr)
+		n1 := operands[0].Value().(byte)
+		if operands[1].TypeName() == "byte" {
+			n2 := operands[1].Value().(byte)
+			return types.NewByte(n1 | n2)
+		} else if operands[1].TypeName() == "number" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewNumber(float64(int64(n1) | n2))
+		} else {
+			panic("invalid type")
+		}
 	case "int16":
-		n := typeSliceToNSlice[int16](operands)
-		nr := n[0] | n[1]
-		return types.NewInt16(nr)
-	case "int":
-		n := typeSliceToNSlice[int32](operands)
-		nr := n[0] | n[1]
-		return types.NewInt(nr)
+		n1 := operands[0].Value().(int16)
+		if operands[1].TypeName() == "int16" {
+			n2 := operands[1].Value().(int16)
+			return types.NewInt16(n1 | n2)
+		} else if operands[1].TypeName() == "number" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewNumber(float64(int64(n1) | n2))
+		} else {
+			panic("invalid type")
+		}
+
 	case "int32":
-		n := typeSliceToNSlice[int32](operands)
-		nr := n[0] | n[1]
-		return types.NewInt32(nr)
+		n1 := operands[0].Value().(int32)
+		if operands[1].TypeName() == "int32" {
+			n2 := operands[1].Value().(int32)
+			return types.NewInt32(n1 | n2)
+		} else if operands[1].TypeName() == "number" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewNumber(float64(int64(n1) | n2))
+		} else {
+			panic("invalid type")
+		}
 	case "int64":
-		n := typeSliceToNSlice[int64](operands)
-		nr := n[0] | n[1]
-		return types.NewInt64(nr)
+		n1 := operands[0].Value().(int64)
+		if operands[1].TypeName() == "int64" {
+			n2 := operands[1].Value().(int64)
+			return types.NewInt64(n1 | n2)
+		} else if operands[1].TypeName() == "number" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewNumber(float64(n1 | n2))
+		} else {
+			panic("invalid type")
+		}
 	case "uint16":
-		n := typeSliceToNSlice[uint16](operands)
-		nr := n[0] | n[1]
-		return types.NewUint16(nr)
-	case "uint":
-		n := typeSliceToNSlice[uint32](operands)
-		nr := n[0] | n[1]
-		return types.NewUint(nr)
+		n1 := operands[0].Value().(uint16)
+		if operands[1].TypeName() == "uint16" {
+			n2 := operands[1].Value().(uint16)
+			return types.NewUint16(n1 | n2)
+		} else if operands[1].TypeName() == "number" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewNumber(float64(int64(n1) | n2))
+		} else {
+			panic("invalid type")
+		}
+
 	case "uint32":
-		n := typeSliceToNSlice[uint32](operands)
-		nr := n[0] | n[1]
-		return types.NewUint32(nr)
+		n1 := operands[0].Value().(uint32)
+		if operands[1].TypeName() == "uint32" {
+			n2 := operands[1].Value().(uint32)
+			return types.NewUint32(n1 | n2)
+		} else if operands[1].TypeName() == "number" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewNumber(float64(int64(n1) | n2))
+		} else {
+			panic("invalid type")
+		}
 	case "uint64":
-		n := typeSliceToNSlice[uint64](operands)
-		nr := n[0] | n[1]
-		return types.NewUint64(nr)
+		n1 := operands[0].Value().(uint64)
+		if operands[1].TypeName() == "uint64" {
+			n2 := operands[1].Value().(uint64)
+			return types.NewUint64(n1 | n2)
+		} else if operands[1].TypeName() == "number" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewNumber(float64(int64(n1) | n2))
+		} else {
+			panic("invalid type")
+		}
 	case "float32":
-		n := typeSliceToNSlice[float32](operands)
-		nr := math.Float32bits(n[0]) | math.Float32bits(n[1])
-		return types.NewFloat32(math.Float32frombits(nr))
+		n1 := int64(operands[0].Value().(float32))
+		if operands[1].TypeName() == "float32" {
+			n2 := int64(operands[1].Value().(float32))
+			return types.NewFloat32(float32(n1 | n2))
+		} else if operands[1].TypeName() == "number" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewNumber(float64(n1 | n2))
+		}
 	case "float64":
-		n := typeSliceToNSlice[float64](operands)
-		nr := math.Float64bits(n[0]) | math.Float64bits(n[1])
-		return types.NewFloat64(math.Float64frombits(nr))
+		n1 := int64(operands[0].Value().(float64))
+		if operands[1].TypeName() == "float64" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewFloat64(float64(n1 | n2))
+		} else if operands[1].TypeName() == "number" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewNumber(float64(n1 | n2))
+		}
 	case "number":
-		n := typeSliceToNSlice[float64](operands)
-		nr := int64(n[0]) | int64(n[1])
-		return types.NewNumber(float64(nr))
+		n1 := int64(operands[0].Value().(float64))
+		var n2 int64
+		if operands[1].TypeName() == "int8" {
+			n2 = int64(operands[1].Value().(int8))
+		} else if operands[1].TypeName() == "byte" {
+			n2 = int64(operands[1].Value().(byte))
+		} else if operands[1].TypeName() == "int16" {
+			n2 = int64(operands[1].Value().(int16))
+		} else if operands[1].TypeName() == "int32" {
+			n2 = int64(operands[1].Value().(int32))
+		} else if operands[1].TypeName() == "int64" {
+			n2 = operands[1].Value().(int64)
+		} else if operands[1].TypeName() == "uint16" {
+			n2 = int64(operands[1].Value().(uint16))
+		} else if operands[1].TypeName() == "uint32" {
+			n2 = int64(operands[1].Value().(uint32))
+		} else if operands[1].TypeName() == "uint64" {
+			n2 = int64(operands[1].Value().(uint64))
+		} else if operands[1].TypeName() == "float32" {
+			n2 = int64(operands[1].Value().(float32))
+		} else {
+			n2 = int64(operands[1].Value().(float64))
+		}
+		return types.NewNumber(float64(n1 | n2))
 	}
 	return nil
 }
@@ -90,62 +167,141 @@ func (b *BitAnd) Operate(operands ...types.Type) types.Type {
 	if !isNumber(operands[0]) || !isNumber(operands[1]) {
 		panic("operand must be a number")
 	}
-	if operands[0].TypeName() != operands[0].TypeName() {
-		panic("operands type not same")
-	}
+
 	switch operands[0].TypeName() {
 	case "int8":
-		n := typeSliceToNSlice[int8](operands)
-		nr := n[0] & n[1]
-		return types.NewInt8(nr)
+		n1 := operands[0].Value().(int8)
+		if operands[1].TypeName() == "int8" {
+			n2 := operands[1].Value().(int8)
+			return types.NewInt8(n1 & n2)
+		} else if operands[1].TypeName() == "number" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewNumber(float64(int64(n1) & n2))
+		} else {
+			panic("invalid type")
+		}
 	case "byte":
-		n := typeSliceToNSlice[byte](operands)
-		nr := n[0] & n[1]
-		return types.NewByte(nr)
+		n1 := operands[0].Value().(byte)
+		if operands[1].TypeName() == "byte" {
+			n2 := operands[1].Value().(byte)
+			return types.NewByte(n1 & n2)
+		} else if operands[1].TypeName() == "number" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewNumber(float64(int64(n1) & n2))
+		} else {
+			panic("invalid type")
+		}
 	case "int16":
-		n := typeSliceToNSlice[int16](operands)
-		nr := n[0] & n[1]
-		return types.NewInt16(nr)
-	case "int":
-		n := typeSliceToNSlice[int32](operands)
-		nr := n[0] & n[1]
-		return types.NewInt(nr)
+		n1 := operands[0].Value().(int16)
+		if operands[1].TypeName() == "int16" {
+			n2 := operands[1].Value().(int16)
+			return types.NewInt16(n1 & n2)
+		} else if operands[1].TypeName() == "number" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewNumber(float64(int64(n1) & n2))
+		} else {
+			panic("invalid type")
+		}
+
 	case "int32":
-		n := typeSliceToNSlice[int32](operands)
-		nr := n[0] & n[1]
-		return types.NewInt32(nr)
+		n1 := operands[0].Value().(int32)
+		if operands[1].TypeName() == "int32" {
+			n2 := operands[1].Value().(int32)
+			return types.NewInt32(n1 & n2)
+		} else if operands[1].TypeName() == "number" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewNumber(float64(int64(n1) & n2))
+		} else {
+			panic("invalid type")
+		}
 	case "int64":
-		n := typeSliceToNSlice[int64](operands)
-		nr := n[0] & n[1]
-		return types.NewInt64(nr)
+		n1 := operands[0].Value().(int64)
+		if operands[1].TypeName() == "int64" {
+			n2 := operands[1].Value().(int64)
+			return types.NewInt64(n1 & n2)
+		} else if operands[1].TypeName() == "number" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewNumber(float64(n1 & n2))
+		} else {
+			panic("invalid type")
+		}
 	case "uint16":
-		n := typeSliceToNSlice[uint16](operands)
-		nr := n[0] & n[1]
-		return types.NewUint16(nr)
-	case "uint":
-		n := typeSliceToNSlice[uint32](operands)
-		nr := n[0] & n[1]
-		return types.NewUint(nr)
+		n1 := operands[0].Value().(uint16)
+		if operands[1].TypeName() == "uint16" {
+			n2 := operands[1].Value().(uint16)
+			return types.NewUint16(n1 & n2)
+		} else if operands[1].TypeName() == "number" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewNumber(float64(int64(n1) & n2))
+		} else {
+			panic("invalid type")
+		}
+
 	case "uint32":
-		n := typeSliceToNSlice[uint32](operands)
-		nr := n[0] & n[1]
-		return types.NewUint32(nr)
+		n1 := operands[0].Value().(uint32)
+		if operands[1].TypeName() == "uint32" {
+			n2 := operands[1].Value().(uint32)
+			return types.NewUint32(n1 & n2)
+		} else if operands[1].TypeName() == "number" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewNumber(float64(int64(n1) & n2))
+		} else {
+			panic("invalid type")
+		}
 	case "uint64":
-		n := typeSliceToNSlice[uint64](operands)
-		nr := n[0] & n[1]
-		return types.NewUint64(nr)
+		n1 := operands[0].Value().(uint64)
+		if operands[1].TypeName() == "uint64" {
+			n2 := operands[1].Value().(uint64)
+			return types.NewUint64(n1 & n2)
+		} else if operands[1].TypeName() == "number" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewNumber(float64(int64(n1) & n2))
+		} else {
+			panic("invalid type")
+		}
 	case "float32":
-		n := typeSliceToNSlice[float32](operands)
-		nr := math.Float32bits(n[0]) & math.Float32bits(n[1])
-		return types.NewFloat32(math.Float32frombits(nr))
+		n1 := int64(operands[0].Value().(float32))
+		if operands[1].TypeName() == "float32" {
+			n2 := int64(operands[1].Value().(float32))
+			return types.NewFloat32(float32(n1 & n2))
+		} else if operands[1].TypeName() == "number" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewNumber(float64(n1 & n2))
+		}
 	case "float64":
-		n := typeSliceToNSlice[float64](operands)
-		nr := math.Float64bits(n[0]) & math.Float64bits(n[1])
-		return types.NewFloat64(math.Float64frombits(nr))
+		n1 := int64(operands[0].Value().(float64))
+		if operands[1].TypeName() == "float64" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewFloat64(float64(n1 & n2))
+		} else if operands[1].TypeName() == "number" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewNumber(float64(n1 & n2))
+		}
 	case "number":
-		n := typeSliceToNSlice[float64](operands)
-		nr := int64(n[0]) & int64(n[1])
-		return types.NewNumber(float64(nr))
+		n1 := int64(operands[0].Value().(float64))
+		var n2 int64
+		if operands[1].TypeName() == "int8" {
+			n2 = int64(operands[1].Value().(int8))
+		} else if operands[1].TypeName() == "byte" {
+			n2 = int64(operands[1].Value().(byte))
+		} else if operands[1].TypeName() == "int16" {
+			n2 = int64(operands[1].Value().(int16))
+		} else if operands[1].TypeName() == "int32" {
+			n2 = int64(operands[1].Value().(int32))
+		} else if operands[1].TypeName() == "int64" {
+			n2 = operands[1].Value().(int64)
+		} else if operands[1].TypeName() == "uint16" {
+			n2 = int64(operands[1].Value().(uint16))
+		} else if operands[1].TypeName() == "uint32" {
+			n2 = int64(operands[1].Value().(uint32))
+		} else if operands[1].TypeName() == "uint64" {
+			n2 = int64(operands[1].Value().(uint64))
+		} else if operands[1].TypeName() == "float32" {
+			n2 = int64(operands[1].Value().(float32))
+		} else {
+			n2 = int64(operands[1].Value().(float64))
+		}
+		return types.NewNumber(float64(n1 & n2))
 	}
 	return nil
 }
@@ -162,62 +318,141 @@ func (b *BitXor) Operate(operands ...types.Type) types.Type {
 	if !isNumber(operands[0]) || !isNumber(operands[1]) {
 		panic("operand must be a number")
 	}
-	if operands[0].TypeName() != operands[0].TypeName() {
-		panic("operands type not same")
-	}
+
 	switch operands[0].TypeName() {
 	case "int8":
-		n := typeSliceToNSlice[int8](operands)
-		nr := n[0] ^ n[1]
-		return types.NewInt8(nr)
+		n1 := operands[0].Value().(int8)
+		if operands[1].TypeName() == "int8" {
+			n2 := operands[1].Value().(int8)
+			return types.NewInt8(n1 ^ n2)
+		} else if operands[1].TypeName() == "number" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewNumber(float64(int64(n1) ^ n2))
+		} else {
+			panic("invalid type")
+		}
 	case "byte":
-		n := typeSliceToNSlice[byte](operands)
-		nr := n[0] ^ n[1]
-		return types.NewByte(nr)
+		n1 := operands[0].Value().(byte)
+		if operands[1].TypeName() == "byte" {
+			n2 := operands[1].Value().(byte)
+			return types.NewByte(n1 ^ n2)
+		} else if operands[1].TypeName() == "number" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewNumber(float64(int64(n1) ^ n2))
+		} else {
+			panic("invalid type")
+		}
 	case "int16":
-		n := typeSliceToNSlice[int16](operands)
-		nr := n[0] ^ n[1]
-		return types.NewInt16(nr)
-	case "int":
-		n := typeSliceToNSlice[int32](operands)
-		nr := n[0] ^ n[1]
-		return types.NewInt(nr)
+		n1 := operands[0].Value().(int16)
+		if operands[1].TypeName() == "int16" {
+			n2 := operands[1].Value().(int16)
+			return types.NewInt16(n1 ^ n2)
+		} else if operands[1].TypeName() == "number" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewNumber(float64(int64(n1) ^ n2))
+		} else {
+			panic("invalid type")
+		}
+
 	case "int32":
-		n := typeSliceToNSlice[int32](operands)
-		nr := n[0] ^ n[1]
-		return types.NewInt32(nr)
+		n1 := operands[0].Value().(int32)
+		if operands[1].TypeName() == "int32" {
+			n2 := operands[1].Value().(int32)
+			return types.NewInt32(n1 ^ n2)
+		} else if operands[1].TypeName() == "number" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewNumber(float64(int64(n1) ^ n2))
+		} else {
+			panic("invalid type")
+		}
 	case "int64":
-		n := typeSliceToNSlice[int64](operands)
-		nr := n[0] ^ n[1]
-		return types.NewInt64(nr)
+		n1 := operands[0].Value().(int64)
+		if operands[1].TypeName() == "int64" {
+			n2 := operands[1].Value().(int64)
+			return types.NewInt64(n1 ^ n2)
+		} else if operands[1].TypeName() == "number" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewNumber(float64(n1 ^ n2))
+		} else {
+			panic("invalid type")
+		}
 	case "uint16":
-		n := typeSliceToNSlice[uint16](operands)
-		nr := n[0] ^ n[1]
-		return types.NewUint16(nr)
-	case "uint":
-		n := typeSliceToNSlice[uint32](operands)
-		nr := n[0] ^ n[1]
-		return types.NewUint(nr)
+		n1 := operands[0].Value().(uint16)
+		if operands[1].TypeName() == "uint16" {
+			n2 := operands[1].Value().(uint16)
+			return types.NewUint16(n1 ^ n2)
+		} else if operands[1].TypeName() == "number" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewNumber(float64(int64(n1) ^ n2))
+		} else {
+			panic("invalid type")
+		}
+
 	case "uint32":
-		n := typeSliceToNSlice[uint32](operands)
-		nr := n[0] ^ n[1]
-		return types.NewUint32(nr)
+		n1 := operands[0].Value().(uint32)
+		if operands[1].TypeName() == "uint32" {
+			n2 := operands[1].Value().(uint32)
+			return types.NewUint32(n1 ^ n2)
+		} else if operands[1].TypeName() == "number" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewNumber(float64(int64(n1) ^ n2))
+		} else {
+			panic("invalid type")
+		}
 	case "uint64":
-		n := typeSliceToNSlice[uint64](operands)
-		nr := n[0] ^ n[1]
-		return types.NewUint64(nr)
+		n1 := operands[0].Value().(uint64)
+		if operands[1].TypeName() == "uint64" {
+			n2 := operands[1].Value().(uint64)
+			return types.NewUint64(n1 ^ n2)
+		} else if operands[1].TypeName() == "number" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewNumber(float64(int64(n1) ^ n2))
+		} else {
+			panic("invalid type")
+		}
 	case "float32":
-		n := typeSliceToNSlice[float32](operands)
-		nr := math.Float32bits(n[0]) ^ math.Float32bits(n[1])
-		return types.NewFloat32(math.Float32frombits(nr))
+		n1 := int64(operands[0].Value().(float32))
+		if operands[1].TypeName() == "float32" {
+			n2 := int64(operands[1].Value().(float32))
+			return types.NewFloat32(float32(n1 ^ n2))
+		} else if operands[1].TypeName() == "number" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewNumber(float64(n1 ^ n2))
+		}
 	case "float64":
-		n := typeSliceToNSlice[float64](operands)
-		nr := math.Float64bits(n[0]) ^ math.Float64bits(n[1])
-		return types.NewFloat64(math.Float64frombits(nr))
+		n1 := int64(operands[0].Value().(float64))
+		if operands[1].TypeName() == "float64" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewFloat64(float64(n1 ^ n2))
+		} else if operands[1].TypeName() == "number" {
+			n2 := int64(operands[1].Value().(float64))
+			return types.NewNumber(float64(n1 ^ n2))
+		}
 	case "number":
-		n := typeSliceToNSlice[float64](operands)
-		nr := int64(n[0]) ^ int64(n[1])
-		return types.NewNumber(float64(nr))
+		n1 := int64(operands[0].Value().(float64))
+		var n2 int64
+		if operands[1].TypeName() == "int8" {
+			n2 = int64(operands[1].Value().(int8))
+		} else if operands[1].TypeName() == "byte" {
+			n2 = int64(operands[1].Value().(byte))
+		} else if operands[1].TypeName() == "int16" {
+			n2 = int64(operands[1].Value().(int16))
+		} else if operands[1].TypeName() == "int32" {
+			n2 = int64(operands[1].Value().(int32))
+		} else if operands[1].TypeName() == "int64" {
+			n2 = operands[1].Value().(int64)
+		} else if operands[1].TypeName() == "uint16" {
+			n2 = int64(operands[1].Value().(uint16))
+		} else if operands[1].TypeName() == "uint32" {
+			n2 = int64(operands[1].Value().(uint32))
+		} else if operands[1].TypeName() == "uint64" {
+			n2 = int64(operands[1].Value().(uint64))
+		} else if operands[1].TypeName() == "float32" {
+			n2 = int64(operands[1].Value().(float32))
+		} else {
+			n2 = int64(operands[1].Value().(float64))
+		}
+		return types.NewNumber(float64(n1 ^ n2))
 	}
 	return nil
 }
@@ -252,12 +487,7 @@ func (b *BitRightShift) Operate(operands ...types.Type) types.Type {
 			panic("cannot use negatif number")
 		}
 		shift = uint64(n)
-	case "int":
-		n := operands[1].Value().(int32)
-		if n < 0 {
-			panic("cannot use negatif number")
-		}
-		shift = uint64(n)
+
 	case "int32":
 		n := operands[1].Value().(int32)
 		if n < 0 {
@@ -273,9 +503,7 @@ func (b *BitRightShift) Operate(operands ...types.Type) types.Type {
 	case "uint16":
 		n := operands[1].Value().(uint16)
 		shift = uint64(n)
-	case "uint":
-		n := operands[1].Value().(uint32)
-		shift = uint64(n)
+
 	case "uint32":
 		n := operands[1].Value().(uint32)
 		shift = uint64(n)
@@ -311,18 +539,14 @@ func (b *BitRightShift) Operate(operands ...types.Type) types.Type {
 	case "int16":
 		n := operands[0].Value().(int16)
 		return types.NewInt16(n >> shift)
-	case "int":
-		n := operands[0].Value().(int32)
-		return types.NewInt(n >> shift)
+
 	case "int32":
 		n := operands[0].Value().(int32)
 		return types.NewInt32(n >> shift)
 	case "int64":
 		n := operands[0].Value().(int64)
 		return types.NewInt64(n >> shift)
-	case "uint":
-		n := operands[0].Value().(uint32)
-		return types.NewUint(n >> shift)
+
 	case "uint16":
 		n := operands[0].Value().(uint16)
 		return types.NewUint16(n >> shift)
@@ -375,12 +599,7 @@ func (b *BitLeftShift) Operate(operands ...types.Type) types.Type {
 			panic("cannot use negatif number")
 		}
 		shift = uint64(n)
-	case "int":
-		n := operands[1].Value().(int32)
-		if n < 0 {
-			panic("cannot use negatif number")
-		}
-		shift = uint64(n)
+
 	case "int32":
 		n := operands[1].Value().(int32)
 		if n < 0 {
@@ -396,9 +615,7 @@ func (b *BitLeftShift) Operate(operands ...types.Type) types.Type {
 	case "uint16":
 		n := operands[1].Value().(uint16)
 		shift = uint64(n)
-	case "uint":
-		n := operands[1].Value().(uint32)
-		shift = uint64(n)
+
 	case "uint32":
 		n := operands[1].Value().(uint32)
 		shift = uint64(n)
@@ -434,18 +651,14 @@ func (b *BitLeftShift) Operate(operands ...types.Type) types.Type {
 	case "int16":
 		n := operands[0].Value().(int16)
 		return types.NewInt16(n << shift)
-	case "int":
-		n := operands[0].Value().(int32)
-		return types.NewInt(n << shift)
+
 	case "int32":
 		n := operands[0].Value().(int32)
 		return types.NewInt32(n << shift)
 	case "int64":
 		n := operands[0].Value().(int64)
 		return types.NewInt64(n << shift)
-	case "uint":
-		n := operands[0].Value().(uint32)
-		return types.NewUint(n << shift)
+
 	case "uint16":
 		n := operands[0].Value().(uint16)
 		return types.NewUint16(n << shift)

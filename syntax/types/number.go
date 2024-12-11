@@ -1,29 +1,5 @@
 package types
 
-type Int struct {
-	value int32
-}
-
-func (i *Int) Value() any {
-	return i.value
-}
-
-func (i *Int) TypeName() string {
-	return "int"
-}
-
-func (i *Int) Assign(v Type) {
-	if v.TypeName() != "int" {
-		panic("invalid type")
-	}
-	iv := v.Value().(int32)
-	i.value = iv
-}
-
-func (i *Int) IsComparable() bool {
-	return true
-}
-
 type Byte struct {
 	value byte
 }
@@ -142,30 +118,6 @@ func (i *Int64) Assign(v Type) {
 	}
 	iv := v.Value().(int64)
 	i.value = iv
-}
-
-type Uint struct {
-	value uint32
-}
-
-func (i *Uint) Value() any {
-	return i.value
-}
-
-func (i *Uint) TypeName() string {
-	return "uint"
-}
-
-func (i *Uint) Assign(v Type) {
-	if v.TypeName() != "uint" {
-		panic("invalid type")
-	}
-	iv := v.Value().(uint32)
-	i.value = iv
-}
-
-func (i *Uint) IsComparable() bool {
-	return true
 }
 
 type Uint16 struct {
@@ -312,13 +264,6 @@ func (i *Number) IsComparable() bool {
 	return true
 }
 
-func NewInt(i int32) *Int {
-
-	return &Int{
-		value: i,
-	}
-}
-
 func NewByte(b byte) *Byte {
 
 	return &Byte{
@@ -354,12 +299,6 @@ func NewInt64(i int64) *Int64 {
 	}
 }
 
-func NewUint(ui uint32) *Uint {
-
-	return &Uint{
-		value: ui,
-	}
-}
 func NewUint16(ui uint16) *Uint16 {
 
 	return &Uint16{

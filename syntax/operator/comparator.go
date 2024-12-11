@@ -79,22 +79,7 @@ func (e *Equal) Operate(operands ...types.Type) types.Type {
 			n2 = int16(n)
 		}
 		return types.NewBoolean(n1 == n2)
-	case "int":
-		if !isNumber(operands[1]) {
-			return types.NewBoolean(false)
-		}
-		if operands[1].TypeName() != "int" && operands[1].TypeName() != "number" {
-			return types.NewBoolean(false)
-		}
-		n1 := operands[0].Value().(int32)
-		var n2 int32
-		if operands[1].TypeName() == "int" {
-			n2 = operands[1].Value().(int32)
-		} else {
-			n := operands[1].Value().(float64)
-			n2 = int32(n)
-		}
-		return types.NewBoolean(n1 == n2)
+
 	case "int32":
 		if !isNumber(operands[1]) {
 			return types.NewBoolean(false)
@@ -127,20 +112,20 @@ func (e *Equal) Operate(operands ...types.Type) types.Type {
 			n2 = int64(n)
 		}
 		return types.NewBoolean(n1 == n2)
-	case "uint":
+	case "uint16":
 		if !isNumber(operands[1]) {
 			return types.NewBoolean(false)
 		}
-		if operands[1].TypeName() != "uint" && operands[1].TypeName() != "number" {
+		if operands[1].TypeName() != "uint16" && operands[1].TypeName() != "number" {
 			return types.NewBoolean(false)
 		}
-		n1 := operands[0].Value().(uint32)
-		var n2 uint32
-		if operands[1].TypeName() == "uint" {
-			n2 = operands[1].Value().(uint32)
+		n1 := operands[0].Value().(uint16)
+		var n2 uint16
+		if operands[1].TypeName() == "uint16" {
+			n2 = operands[1].Value().(uint16)
 		} else {
 			n := operands[1].Value().(float64)
-			n2 = uint32(n)
+			n2 = uint16(n)
 		}
 		return types.NewBoolean(n1 == n2)
 	case "uint32":
@@ -213,14 +198,10 @@ func (e *Equal) Operate(operands ...types.Type) types.Type {
 			n2 = float64(operands[1].Value().(byte))
 		} else if operands[1].TypeName() == "int16" {
 			n2 = float64(operands[1].Value().(int16))
-		} else if operands[1].TypeName() == "int" {
-			n2 = float64(operands[1].Value().(int32))
 		} else if operands[1].TypeName() == "int32" {
 			n2 = float64(operands[1].Value().(int32))
 		} else if operands[1].TypeName() == "int64" {
 			n2 = float64(operands[1].Value().(int64))
-		} else if operands[1].TypeName() == "uint" {
-			n2 = float64(operands[1].Value().(uint32))
 		} else if operands[1].TypeName() == "uint16" {
 			n2 = float64(operands[1].Value().(uint16))
 		} else if operands[1].TypeName() == "uint32" {
@@ -314,22 +295,7 @@ func (ne *NotEqual) Operate(operands ...types.Type) types.Type {
 			n2 = int16(n)
 		}
 		return types.NewBoolean(n1 != n2)
-	case "int":
-		if !isNumber(operands[1]) {
-			return types.NewBoolean(false)
-		}
-		if operands[1].TypeName() != "int" && operands[1].TypeName() != "number" {
-			return types.NewBoolean(false)
-		}
-		n1 := operands[0].Value().(int32)
-		var n2 int32
-		if operands[1].TypeName() == "int" {
-			n2 = operands[1].Value().(int32)
-		} else {
-			n := operands[1].Value().(float64)
-			n2 = int32(n)
-		}
-		return types.NewBoolean(n1 != n2)
+
 	case "int32":
 		if !isNumber(operands[1]) {
 			return types.NewBoolean(false)
@@ -362,20 +328,20 @@ func (ne *NotEqual) Operate(operands ...types.Type) types.Type {
 			n2 = int64(n)
 		}
 		return types.NewBoolean(n1 != n2)
-	case "uint":
+	case "uint16":
 		if !isNumber(operands[1]) {
 			return types.NewBoolean(false)
 		}
-		if operands[1].TypeName() != "uint" && operands[1].TypeName() != "number" {
+		if operands[1].TypeName() != "uint16" && operands[1].TypeName() != "number" {
 			return types.NewBoolean(false)
 		}
-		n1 := operands[0].Value().(uint32)
-		var n2 uint32
-		if operands[1].TypeName() == "uint" {
-			n2 = operands[1].Value().(uint32)
+		n1 := operands[0].Value().(uint16)
+		var n2 uint16
+		if operands[1].TypeName() == "uint32" {
+			n2 = operands[1].Value().(uint16)
 		} else {
 			n := operands[1].Value().(float64)
-			n2 = uint32(n)
+			n2 = uint16(n)
 		}
 		return types.NewBoolean(n1 != n2)
 	case "uint32":
@@ -448,14 +414,10 @@ func (ne *NotEqual) Operate(operands ...types.Type) types.Type {
 			n2 = float64(operands[1].Value().(byte))
 		} else if operands[1].TypeName() == "int16" {
 			n2 = float64(operands[1].Value().(int16))
-		} else if operands[1].TypeName() == "int" {
-			n2 = float64(operands[1].Value().(int32))
 		} else if operands[1].TypeName() == "int32" {
 			n2 = float64(operands[1].Value().(int32))
 		} else if operands[1].TypeName() == "int64" {
 			n2 = float64(operands[1].Value().(int64))
-		} else if operands[1].TypeName() == "uint" {
-			n2 = float64(operands[1].Value().(uint32))
 		} else if operands[1].TypeName() == "uint16" {
 			n2 = float64(operands[1].Value().(uint16))
 		} else if operands[1].TypeName() == "uint32" {
@@ -539,22 +501,7 @@ func (l *Less) Operate(operands ...types.Type) types.Type {
 			n2 = int16(n)
 		}
 		return types.NewBoolean(n1 < n2)
-	case "int":
-		if !isNumber(operands[1]) {
-			return types.NewBoolean(false)
-		}
-		if operands[1].TypeName() != "int" && operands[1].TypeName() != "number" {
-			return types.NewBoolean(false)
-		}
-		n1 := operands[0].Value().(int32)
-		var n2 int32
-		if operands[1].TypeName() == "int" {
-			n2 = operands[1].Value().(int32)
-		} else {
-			n := operands[1].Value().(float64)
-			n2 = int32(n)
-		}
-		return types.NewBoolean(n1 < n2)
+
 	case "int32":
 		if !isNumber(operands[1]) {
 			return types.NewBoolean(false)
@@ -587,20 +534,20 @@ func (l *Less) Operate(operands ...types.Type) types.Type {
 			n2 = int64(n)
 		}
 		return types.NewBoolean(n1 < n2)
-	case "uint":
+	case "uint16":
 		if !isNumber(operands[1]) {
 			return types.NewBoolean(false)
 		}
-		if operands[1].TypeName() != "uint" && operands[1].TypeName() != "number" {
+		if operands[1].TypeName() != "uint16" && operands[1].TypeName() != "number" {
 			return types.NewBoolean(false)
 		}
-		n1 := operands[0].Value().(uint32)
-		var n2 uint32
-		if operands[1].TypeName() == "uint" {
-			n2 = operands[1].Value().(uint32)
+		n1 := operands[0].Value().(uint16)
+		var n2 uint16
+		if operands[1].TypeName() == "uint16" {
+			n2 = operands[1].Value().(uint16)
 		} else {
 			n := operands[1].Value().(float64)
-			n2 = uint32(n)
+			n2 = uint16(n)
 		}
 		return types.NewBoolean(n1 < n2)
 	case "uint32":
@@ -673,14 +620,10 @@ func (l *Less) Operate(operands ...types.Type) types.Type {
 			n2 = float64(operands[1].Value().(byte))
 		} else if operands[1].TypeName() == "int16" {
 			n2 = float64(operands[1].Value().(int16))
-		} else if operands[1].TypeName() == "int" {
-			n2 = float64(operands[1].Value().(int32))
 		} else if operands[1].TypeName() == "int32" {
 			n2 = float64(operands[1].Value().(int32))
 		} else if operands[1].TypeName() == "int64" {
 			n2 = float64(operands[1].Value().(int64))
-		} else if operands[1].TypeName() == "uint" {
-			n2 = float64(operands[1].Value().(uint32))
 		} else if operands[1].TypeName() == "uint16" {
 			n2 = float64(operands[1].Value().(uint16))
 		} else if operands[1].TypeName() == "uint32" {
@@ -765,22 +708,7 @@ func (m *More) Operate(operands ...types.Type) types.Type {
 			n2 = int16(n)
 		}
 		return types.NewBoolean(n1 > n2)
-	case "int":
-		if !isNumber(operands[1]) {
-			return types.NewBoolean(false)
-		}
-		if operands[1].TypeName() != "int" && operands[1].TypeName() != "number" {
-			return types.NewBoolean(false)
-		}
-		n1 := operands[0].Value().(int32)
-		var n2 int32
-		if operands[1].TypeName() == "int" {
-			n2 = operands[1].Value().(int32)
-		} else {
-			n := operands[1].Value().(float64)
-			n2 = int32(n)
-		}
-		return types.NewBoolean(n1 > n2)
+
 	case "int32":
 		if !isNumber(operands[1]) {
 			return types.NewBoolean(false)
@@ -813,20 +741,20 @@ func (m *More) Operate(operands ...types.Type) types.Type {
 			n2 = int64(n)
 		}
 		return types.NewBoolean(n1 > n2)
-	case "uint":
+	case "uint16":
 		if !isNumber(operands[1]) {
 			return types.NewBoolean(false)
 		}
-		if operands[1].TypeName() != "uint" && operands[1].TypeName() != "number" {
+		if operands[1].TypeName() != "uint16" && operands[1].TypeName() != "number" {
 			return types.NewBoolean(false)
 		}
-		n1 := operands[0].Value().(uint32)
-		var n2 uint32
-		if operands[1].TypeName() == "uint" {
-			n2 = operands[1].Value().(uint32)
+		n1 := operands[0].Value().(uint16)
+		var n2 uint16
+		if operands[1].TypeName() == "uint16" {
+			n2 = operands[1].Value().(uint16)
 		} else {
 			n := operands[1].Value().(float64)
-			n2 = uint32(n)
+			n2 = uint16(n)
 		}
 		return types.NewBoolean(n1 > n2)
 	case "uint32":
@@ -899,14 +827,10 @@ func (m *More) Operate(operands ...types.Type) types.Type {
 			n2 = float64(operands[1].Value().(byte))
 		} else if operands[1].TypeName() == "int16" {
 			n2 = float64(operands[1].Value().(int16))
-		} else if operands[1].TypeName() == "int" {
-			n2 = float64(operands[1].Value().(int32))
 		} else if operands[1].TypeName() == "int32" {
 			n2 = float64(operands[1].Value().(int32))
 		} else if operands[1].TypeName() == "int64" {
 			n2 = float64(operands[1].Value().(int64))
-		} else if operands[1].TypeName() == "uint" {
-			n2 = float64(operands[1].Value().(uint32))
 		} else if operands[1].TypeName() == "uint16" {
 			n2 = float64(operands[1].Value().(uint16))
 		} else if operands[1].TypeName() == "uint32" {
@@ -990,22 +914,7 @@ func (le *LessOrEqual) Operate(operands ...types.Type) types.Type {
 			n2 = int16(n)
 		}
 		return types.NewBoolean(n1 <= n2)
-	case "int":
-		if !isNumber(operands[1]) {
-			return types.NewBoolean(false)
-		}
-		if operands[1].TypeName() != "int" && operands[1].TypeName() != "number" {
-			return types.NewBoolean(false)
-		}
-		n1 := operands[0].Value().(int32)
-		var n2 int32
-		if operands[1].TypeName() == "int" {
-			n2 = operands[1].Value().(int32)
-		} else {
-			n := operands[1].Value().(float64)
-			n2 = int32(n)
-		}
-		return types.NewBoolean(n1 <= n2)
+
 	case "int32":
 		if !isNumber(operands[1]) {
 			return types.NewBoolean(false)
@@ -1038,20 +947,20 @@ func (le *LessOrEqual) Operate(operands ...types.Type) types.Type {
 			n2 = int64(n)
 		}
 		return types.NewBoolean(n1 <= n2)
-	case "uint":
+	case "uint16":
 		if !isNumber(operands[1]) {
 			return types.NewBoolean(false)
 		}
-		if operands[1].TypeName() != "uint" && operands[1].TypeName() != "number" {
+		if operands[1].TypeName() != "uint16" && operands[1].TypeName() != "number" {
 			return types.NewBoolean(false)
 		}
-		n1 := operands[0].Value().(uint32)
-		var n2 uint32
+		n1 := operands[0].Value().(uint16)
+		var n2 uint16
 		if operands[1].TypeName() == "uint" {
-			n2 = operands[1].Value().(uint32)
+			n2 = operands[1].Value().(uint16)
 		} else {
 			n := operands[1].Value().(float64)
-			n2 = uint32(n)
+			n2 = uint16(n)
 		}
 		return types.NewBoolean(n1 <= n2)
 	case "uint32":
@@ -1124,14 +1033,10 @@ func (le *LessOrEqual) Operate(operands ...types.Type) types.Type {
 			n2 = float64(operands[1].Value().(byte))
 		} else if operands[1].TypeName() == "int16" {
 			n2 = float64(operands[1].Value().(int16))
-		} else if operands[1].TypeName() == "int" {
-			n2 = float64(operands[1].Value().(int32))
 		} else if operands[1].TypeName() == "int32" {
 			n2 = float64(operands[1].Value().(int32))
 		} else if operands[1].TypeName() == "int64" {
 			n2 = float64(operands[1].Value().(int64))
-		} else if operands[1].TypeName() == "uint" {
-			n2 = float64(operands[1].Value().(uint32))
 		} else if operands[1].TypeName() == "uint16" {
 			n2 = float64(operands[1].Value().(uint16))
 		} else if operands[1].TypeName() == "uint32" {
@@ -1215,22 +1120,7 @@ func (me *MoreOrEqual) Operate(operands ...types.Type) types.Type {
 			n2 = int16(n)
 		}
 		return types.NewBoolean(n1 >= n2)
-	case "int":
-		if !isNumber(operands[1]) {
-			return types.NewBoolean(false)
-		}
-		if operands[1].TypeName() != "int" && operands[1].TypeName() != "number" {
-			return types.NewBoolean(false)
-		}
-		n1 := operands[0].Value().(int32)
-		var n2 int32
-		if operands[1].TypeName() == "int" {
-			n2 = operands[1].Value().(int32)
-		} else {
-			n := operands[1].Value().(float64)
-			n2 = int32(n)
-		}
-		return types.NewBoolean(n1 >= n2)
+
 	case "int32":
 		if !isNumber(operands[1]) {
 			return types.NewBoolean(false)
@@ -1263,20 +1153,20 @@ func (me *MoreOrEqual) Operate(operands ...types.Type) types.Type {
 			n2 = int64(n)
 		}
 		return types.NewBoolean(n1 >= n2)
-	case "uint":
+	case "uint16":
 		if !isNumber(operands[1]) {
 			return types.NewBoolean(false)
 		}
-		if operands[1].TypeName() != "uint" && operands[1].TypeName() != "number" {
+		if operands[1].TypeName() != "uint16" && operands[1].TypeName() != "number" {
 			return types.NewBoolean(false)
 		}
-		n1 := operands[0].Value().(uint32)
-		var n2 uint32
-		if operands[1].TypeName() == "uint" {
-			n2 = operands[1].Value().(uint32)
+		n1 := operands[0].Value().(uint16)
+		var n2 uint16
+		if operands[1].TypeName() == "uint16" {
+			n2 = operands[1].Value().(uint16)
 		} else {
 			n := operands[1].Value().(float64)
-			n2 = uint32(n)
+			n2 = uint16(n)
 		}
 		return types.NewBoolean(n1 >= n2)
 	case "uint32":
@@ -1349,14 +1239,10 @@ func (me *MoreOrEqual) Operate(operands ...types.Type) types.Type {
 			n2 = float64(operands[1].Value().(byte))
 		} else if operands[1].TypeName() == "int16" {
 			n2 = float64(operands[1].Value().(int16))
-		} else if operands[1].TypeName() == "int" {
-			n2 = float64(operands[1].Value().(int32))
 		} else if operands[1].TypeName() == "int32" {
 			n2 = float64(operands[1].Value().(int32))
 		} else if operands[1].TypeName() == "int64" {
 			n2 = float64(operands[1].Value().(int64))
-		} else if operands[1].TypeName() == "uint" {
-			n2 = float64(operands[1].Value().(uint32))
 		} else if operands[1].TypeName() == "uint16" {
 			n2 = float64(operands[1].Value().(uint16))
 		} else if operands[1].TypeName() == "uint32" {
