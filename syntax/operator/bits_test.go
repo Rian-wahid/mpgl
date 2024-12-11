@@ -107,3 +107,128 @@ func TestBitwiseInt32(t *testing.T) {
 	i32_3 = sr.Operate(i32_1, i32_2)
 	assert.Equal(t, int32(2>>1), i32_3.Value().(int32))
 }
+
+func TestBitwiseInt64(t *testing.T) {
+	i64_1 := types.NewInt64(1)
+	i64_2 := types.NewInt64(2)
+	or := &BitOr{}
+	and := &BitAnd{}
+	xor := &BitXor{}
+	sl := &BitLeftShift{}
+	sr := &BitRightShift{}
+	i64_3 := or.Operate(i64_1, i64_2)
+	assert.Equal(t, int64(1|2), i64_3.Value().(int64))
+
+	i64_3 = and.Operate(i64_1, i64_2)
+	assert.Equal(t, int64(1&2), i64_3.Value().(int64))
+	i64_3 = xor.Operate(i64_1, i64_2)
+	assert.Equal(t, int64(1^2), i64_3.Value().(int64))
+	i64_2 = types.NewInt64(1)
+	i64_3 = sl.Operate(i64_1, i64_2)
+	assert.Equal(t, int64(1<<1), i64_3.Value().(int64))
+	i64_1 = types.NewInt64(2)
+	i64_3 = sr.Operate(i64_1, i64_2)
+	assert.Equal(t, int64(2>>1), i64_3.Value().(int64))
+}
+
+func TestBitwiseUint16(t *testing.T) {
+	u16_1 := types.NewUint16(1)
+	u16_2 := types.NewUint16(2)
+	or := &BitOr{}
+	and := &BitAnd{}
+	xor := &BitXor{}
+	sl := &BitLeftShift{}
+	sr := &BitRightShift{}
+	assert.Equal(t, uint16(1|2), or.Operate(u16_1, u16_2).Value().(uint16))
+	assert.Equal(t, uint16(1&2), and.Operate(u16_1, u16_2).Value().(uint16))
+	assert.Equal(t, uint16(1^2), xor.Operate(u16_1, u16_2).Value().(uint16))
+	u16_2 = types.NewUint16(1)
+	assert.Equal(t, uint16(1<<1), sl.Operate(u16_1, u16_2).Value().(uint16))
+	u16_1 = types.NewUint16(2)
+	assert.Equal(t, uint16(2>>1), sr.Operate(u16_1, u16_2).Value().(uint16))
+}
+
+func TestBitwiseUint32(t *testing.T) {
+	u32_1 := types.NewUint32(1)
+	u32_2 := types.NewUint32(2)
+	or := &BitOr{}
+	and := &BitAnd{}
+	xor := &BitXor{}
+	sl := &BitLeftShift{}
+	sr := &BitRightShift{}
+	assert.Equal(t, uint32(1|2), or.Operate(u32_1, u32_2).Value().(uint32))
+	assert.Equal(t, uint32(1&2), and.Operate(u32_1, u32_2).Value().(uint32))
+	assert.Equal(t, uint32(1^2), xor.Operate(u32_1, u32_2).Value().(uint32))
+	u32_2 = types.NewUint32(1)
+	assert.Equal(t, uint32(1<<1), sl.Operate(u32_1, u32_2).Value().(uint32))
+	u32_1 = types.NewUint32(2)
+	assert.Equal(t, uint32(2>>1), sr.Operate(u32_1, u32_2).Value().(uint32))
+}
+
+func TestBitwiseUint64(t *testing.T) {
+	u64_1 := types.NewUint64(1)
+	u64_2 := types.NewUint64(2)
+	or := &BitOr{}
+	and := &BitAnd{}
+	xor := &BitXor{}
+	sl := &BitLeftShift{}
+	sr := &BitRightShift{}
+	assert.Equal(t, uint64(1|2), or.Operate(u64_1, u64_2).Value().(uint64))
+	assert.Equal(t, uint64(1&2), and.Operate(u64_1, u64_2).Value().(uint64))
+	assert.Equal(t, uint64(1^2), xor.Operate(u64_1, u64_2).Value().(uint64))
+	u64_2 = types.NewUint64(1)
+	assert.Equal(t, uint64(1<<1), sl.Operate(u64_1, u64_2).Value().(uint64))
+	u64_1 = types.NewUint64(2)
+	assert.Equal(t, uint64(2>>1), sr.Operate(u64_1, u64_2).Value().(uint64))
+}
+
+func TestBitwiseFloat32(t *testing.T) {
+	f32_1 := types.NewFloat32(1)
+	f32_2 := types.NewFloat32(2)
+	or := &BitOr{}
+	and := &BitAnd{}
+	xor := &BitXor{}
+	sl := &BitLeftShift{}
+	sr := &BitRightShift{}
+	assert.Equal(t, float32(1|2), or.Operate(f32_1, f32_2).Value().(float32))
+	assert.Equal(t, float32(1&2), and.Operate(f32_1, f32_2).Value().(float32))
+	assert.Equal(t, float32(1^2), xor.Operate(f32_1, f32_2).Value().(float32))
+	f32_2 = types.NewFloat32(1)
+	assert.Equal(t, float32(1<<1), sl.Operate(f32_1, f32_2).Value().(float32))
+	f32_1 = types.NewFloat32(2)
+	assert.Equal(t, float32(2>>1), sr.Operate(f32_1, f32_2).Value().(float32))
+}
+
+func TestBitwiseFloat64(t *testing.T) {
+	f64_1 := types.NewFloat64(1)
+	f64_2 := types.NewFloat64(2)
+	or := &BitOr{}
+	and := &BitAnd{}
+	xor := &BitXor{}
+	sl := &BitLeftShift{}
+	sr := &BitRightShift{}
+	assert.Equal(t, float64(1|2), or.Operate(f64_1, f64_2).Value().(float64))
+	assert.Equal(t, float64(1&2), and.Operate(f64_1, f64_2).Value().(float64))
+	assert.Equal(t, float64(1^2), xor.Operate(f64_1, f64_2).Value().(float64))
+	f64_2 = types.NewFloat64(1)
+	assert.Equal(t, float64(1<<1), sl.Operate(f64_1, f64_2).Value().(float64))
+	f64_1 = types.NewFloat64(2)
+	assert.Equal(t, float64(2>>1), sr.Operate(f64_1, f64_2).Value().(float64))
+}
+
+func TestBitwiseNumber(t *testing.T) {
+	num_1 := types.NewNumber(1)
+	num_2 := types.NewNumber(2)
+	or := &BitOr{}
+	and := &BitAnd{}
+	xor := &BitXor{}
+	sl := &BitLeftShift{}
+	sr := &BitRightShift{}
+	assert.Equal(t, float64(1|2), or.Operate(num_1, num_2).Value().(float64))
+	assert.Equal(t, float64(1&2), and.Operate(num_1, num_2).Value().(float64))
+	assert.Equal(t, float64(1^2), xor.Operate(num_1, num_2).Value().(float64))
+	num_2 = types.NewNumber(1)
+	assert.Equal(t, float64(1<<1), sl.Operate(num_1, num_2).Value().(float64))
+	num_1 = types.NewNumber(2)
+	assert.Equal(t, float64(2>>1), sr.Operate(num_1, num_2).Value().(float64))
+}
